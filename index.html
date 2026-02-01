@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KITHU, Will You Be My Valentine? 💘</title>
+  <title>KITHU — Will You Be My Valentine? 💘</title>
 
   <style>
     * { box-sizing: border-box; }
@@ -21,11 +21,11 @@
 
     .card {
       background: white;
-      padding: 40px 30px;
-      border-radius: 24px;
+      padding: 50px 40px;
+      border-radius: 28px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      max-width: 340px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+      max-width: 380px;
       animation: popIn 0.8s ease;
       position: relative;
       z-index: 2;
@@ -33,30 +33,39 @@
 
     h1 {
       color: #ff4d6d;
+      margin-bottom: 20px;
+      font-size: 2.6rem;
+      line-height: 1.2;
+    }
+
+    .name {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #ff4d6d;
       margin-bottom: 10px;
     }
 
     p {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       color: #555;
-      font-size: 1.1rem;
+      font-size: 1.4rem;
     }
 
     button {
-      padding: 12px 26px;
-      font-size: 16px;
+      padding: 16px 36px;
+      font-size: 1.4rem;
       border: none;
-      border-radius: 30px;
+      border-radius: 40px;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
 
-    button:hover { transform: scale(1.08); }
+    button:hover { transform: scale(1.1); }
 
     .yes {
       background-color: #ff4d6d;
       color: white;
-      margin-right: 12px;
+      margin-right: 16px;
     }
 
     .no {
@@ -68,8 +77,8 @@
     /* Confetti */
     .confetti {
       position: fixed;
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       top: -10px;
       animation: fall linear forwards;
       z-index: 1;
@@ -88,9 +97,10 @@
 
 <body>
   <div class="card" id="card">
-    <h1>Hey ❤️</h1>
-    <p>Will you be my Valentine?</p>
-    <button class="yes" onclick="sayYes()">Yes 💖</button>
+    <div class="name">KITHU 💖</div>
+    <h1>Will you be my Valentine?</h1>
+
+    <button class="yes" onclick="sayYes()">Yes 💕</button>
     <button class="no" id="noBtn">No 🙃</button>
   </div>
 
@@ -98,32 +108,38 @@
     const noBtn = document.getElementById('noBtn');
     const card = document.getElementById('card');
 
-    // No button runs away
-    noBtn.addEventListener('mouseover', () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
+    // Make the No button run away when cursor gets close
+    document.addEventListener('mousemove', (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+
+      if (distance < 120) {
+        const x = Math.random() * (window.innerWidth - rect.width - 20);
+        const y = Math.random() * (window.innerHeight - rect.height - 20);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+      }
     });
 
-    // Yes clicked
     function sayYes() {
       card.innerHTML = `
-        <h1 style="color:#ff4d6d;font-size:2.5rem;">YAY!!! 💕🥰</h1>
-        <p style="font-size:1.4rem;">Best decision ever.</p>
-        <img 
+        <h1 style="font-size:3rem;color:#ff4d6d;">YAY!!! 💕🥰</h1>
+        <p style="font-size:1.6rem;">Best decision ever.</p>
+        <img
           src="https://media.tenor.com/6v7lYyY7j7cAAAAC/bear-kiss.gif"
           alt="Bear Kiss GIF"
-          style="max-width:300px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.25);margin-top:20px;"
+          style="max-width:320px;border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,0.3);margin-top:25px;"
         />
       `;
 
       launchConfetti();
     }
 
-    // Confetti function (stable)
     function launchConfetti() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 120; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + 'vw';
