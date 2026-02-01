@@ -6,8 +6,6 @@
   <title>KITHU — Will You Be My Valentine? 💘</title>
 
   <style>
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
       height: 100vh;
@@ -21,51 +19,39 @@
 
     .card {
       background: white;
-      padding: 50px 40px;
-      border-radius: 28px;
+      padding: 45px 35px;
+      border-radius: 24px;
       text-align: center;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-      max-width: 380px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      max-width: 360px;
       animation: popIn 0.8s ease;
       position: relative;
-      z-index: 2;
     }
 
     h1 {
       color: #ff4d6d;
-      margin-bottom: 20px;
-      font-size: 2.6rem;
+      font-size: 2.4rem;
+      margin-bottom: 30px;
       line-height: 1.2;
     }
 
-    .name {
-      font-size: 3.2rem;
-      font-weight: 800;
-      color: #ff4d6d;
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 40px;
-      color: #555;
-      font-size: 1.4rem;
-    }
-
     button {
-      padding: 16px 36px;
-      font-size: 1.4rem;
+      padding: 14px 32px;
+      font-size: 1.3rem;
       border: none;
-      border-radius: 40px;
+      border-radius: 30px;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
 
-    button:hover { transform: scale(1.1); }
+    button:hover {
+      transform: scale(1.08);
+    }
 
     .yes {
       background-color: #ff4d6d;
       color: white;
-      margin-right: 16px;
+      margin-right: 12px;
     }
 
     .no {
@@ -77,11 +63,10 @@
     /* Confetti */
     .confetti {
       position: fixed;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       top: -10px;
       animation: fall linear forwards;
-      z-index: 1;
     }
 
     @keyframes fall {
@@ -97,10 +82,8 @@
 
 <body>
   <div class="card" id="card">
-    <div class="name">KITHU 💖</div>
-    <h1>Will you be my Valentine?</h1>
-
-    <button class="yes" onclick="sayYes()">Yes 💕</button>
+    <h1>KITHU 💖<br>Will you be my Valentine?</h1>
+    <button class="yes" onclick="sayYes()">Yes 💖</button>
     <button class="no" id="noBtn">No 🙃</button>
   </div>
 
@@ -108,7 +91,7 @@
     const noBtn = document.getElementById('noBtn');
     const card = document.getElementById('card');
 
-    // Make the No button run away when cursor gets close
+    // No button dodges the cursor
     document.addEventListener('mousemove', (e) => {
       const rect = noBtn.getBoundingClientRect();
       const distance = Math.hypot(
@@ -116,7 +99,7 @@
         e.clientY - (rect.top + rect.height / 2)
       );
 
-      if (distance < 120) {
+      if (distance < 100) {
         const x = Math.random() * (window.innerWidth - rect.width - 20);
         const y = Math.random() * (window.innerHeight - rect.height - 20);
         noBtn.style.left = x + 'px';
@@ -125,16 +108,7 @@
     });
 
     function sayYes() {
-      card.innerHTML = `
-        <h1 style="font-size:3rem;color:#ff4d6d;">YAY!!! 💕🥰</h1>
-        <p style="font-size:1.6rem;">Best decision ever.</p>
-        <img
-          src="https://media.tenor.com/6v7lYyY7j7cAAAAC/bear-kiss.gif"
-          alt="Bear Kiss GIF"
-          style="max-width:320px;border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,0.3);margin-top:25px;"
-        />
-      `;
-
+      card.innerHTML = '<h1 style="font-size:2.6rem;color:#ff4d6d;">YAY!!! 💕🥰<br>Best decision ever.</h1>';
       launchConfetti();
     }
 
